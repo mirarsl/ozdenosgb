@@ -1,0 +1,9 @@
+[16-Apr-2018 23:21:11 UTC] PHP Warning:  include(static_files.php): failed to open stream: No such file or directory in /home/h19183/public_html/egitim/28-Ekim.php on line 13
+[16-Apr-2018 23:21:11 UTC] PHP Warning:  include(static_files.php): failed to open stream: No such file or directory in /home/h19183/public_html/egitim/28-Ekim.php on line 13
+[16-Apr-2018 23:21:11 UTC] PHP Warning:  include(): Failed opening 'static_files.php' for inclusion (include_path='.:/opt/alt/php54/usr/share/pear:/opt/alt/php54/usr/share/php') in /home/h19183/public_html/egitim/28-Ekim.php on line 13
+[16-Apr-2018 23:34:32 UTC] PHP Warning:  include(static_files.php): failed to open stream: No such file or directory in /home/h19183/public_html/egitim/index.php on line 13
+[16-Apr-2018 23:34:32 UTC] PHP Warning:  include(static_files.php): failed to open stream: No such file or directory in /home/h19183/public_html/egitim/index.php on line 13
+[16-Apr-2018 23:34:32 UTC] PHP Warning:  include(): Failed opening 'static_files.php' for inclusion (include_path='.:/opt/alt/php54/usr/share/pear:/opt/alt/php54/usr/share/php') in /home/h19183/public_html/egitim/index.php on line 13
+[17-Apr-2018 17:32:20 UTC] PHP Warning:  include(static_files.php): failed to open stream: No such file or directory in /home/h19183/public_html/egitim/29-Agustos.php on line 13
+[17-Apr-2018 17:32:20 UTC] PHP Warning:  include(static_files.php): failed to open stream: No such file or directory in /home/h19183/public_html/egitim/29-Agustos.php on line 13
+[17-Apr-2018 17:32:20 UTC] PHP Warning:  include(): Failed opening 'static_files.php' for inclusion (include_path='.:/opt/alt/php54/usr/share/pear:/opt/alt/php54/usr/share/php') in /home/h19183/public_html/egitim/29-Agustos.php on line 13

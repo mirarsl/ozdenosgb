@@ -119,5 +119,22 @@
 </script>
 @stack('scripts')
 @stack('page_codes')
+@if (env('APP_ENV') == 'local')
+<script>
+	$(document).ready(function() {
+		$('body *:not(script):not(link)').each(function() {
+			if ($(this).children().length === 0) {
+				var htmlContent = this.outerHTML;
+				if (htmlContent) {
+					console.log(htmlContent);
+					if (htmlContent.includes('https://ozdenosgb.com') || htmlContent.includes('https://www.ozdenosgb.com')) {
+						this.outerHTML = htmlContent.replace(/https:\/\/(www\.)?ozdenosgb\.com/g, 'http://ozdenosgb.test');
+					}
+				}
+			}
+		});
+	});
+</script>
+@endif
 </body>
 </html>

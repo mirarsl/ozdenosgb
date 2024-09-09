@@ -75,12 +75,37 @@ class PageController extends Controller
         return view("pages.details", compact("Page", "Meta", "Other", 'View'));
     }
 
-    function project($slug)
+    function service(Request $request)
     {
-        $Meta = Page::where('slug', 'projeler')->first();
-        $Project = Project::where("slug", $slug)->active()->first();
-        $Others = Project::where("slug", '!=', $slug)->order()->active()->limit(4, 0)->get();
-        return ['Page' => $Project, 'Other' => $Others, 'Meta' => $Meta, 'View' => 'project-details'];
+        $segments = explode('/',$request->slug);
+        foreach ($segments as $key => $value) {
+            if($key == 0){
+                $Page = Service::where('slug', $value)->where('service_id',null)->first();
+            }else{
+                $Page = $Page->child()->where('slug',$value)->first();
+            }
+            if (empty($Page)) abort(404);
+        }
+        if (empty($Page)) abort(404);
+        $Meta = Page::where('slug', 'hizmetlerimiz')->first();
+        $Other = Service::where("slug", '!=', $request->slug)->order()->active()->limit(4, 0)->get();
+        $Route = 'service';
+
+        SEOTools::setTitle($Page->meta_title ?? $Page->title);
+        SEOTools::setDescription($Page->meta_desc);
+        SEOMeta::addKeyword(explode(',', $Page->meta_tags));
+        SEOTools::setCanonical(url()->full());
+        SEOTools::opengraph()->setTitle(SEOTools::getTitle());
+        SEOTools::opengraph()->setUrl(url()->full());
+        SEOTools::opengraph()->addImage(url(asset($Page->image)));
+        SEOTools::opengraph()->addProperty('type', 'articles');
+        SEOTools::opengraph()->addProperty('locale', 'tr');
+        SEOTools::twitter()->setTitle(SEOTools::getTitle());
+        SEOTools::jsonLd()->setTitle(SEOTools::getTitle());
+        SEOTools::jsonLd()->addImage(url(asset($Page->image)));
+
+        return view('details.service-details',compact('Page','Other','Meta','Route'));
+        // return ['Page' => $Project, 'Other' => $Others, 'Meta' => $Meta, 'View' => 'project-details'];
 
     }
     function news($slug)

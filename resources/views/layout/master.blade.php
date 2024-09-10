@@ -119,7 +119,7 @@
 </script>
 @stack('scripts')
 @stack('page_codes')
-@if (env('APP_ENV') == 'local')
+@if (env('APP_ENV') != 'production')
 <script>
 	$(document).ready(function() {
 		$('body *:not(script):not(link)').each(function() {
@@ -128,7 +128,7 @@
 				if (htmlContent) {
 					console.log(htmlContent);
 					if (htmlContent.includes('https://ozdenosgb.com') || htmlContent.includes('https://www.ozdenosgb.com')) {
-						this.outerHTML = htmlContent.replace(/https:\/\/(www\.)?ozdenosgb\.com/g, 'http://ozdenosgb.test');
+						this.outerHTML = htmlContent.replace(/https:\/\/(www\.)?ozdenosgb\.com/g, @if(env('APP_ENV') == 'local') 'http://ozdenosgb.test' @else 'https://ozdenosgb.bario.com.tr'  @endif );
 					}
 				}
 			}

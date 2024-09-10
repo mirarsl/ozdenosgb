@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Service extends Model
 {
      function data(){
-          return $this->hasMany(Project::class,'service_id','id');
+          return $this->hasMany(Service::class,'service_id','id');
      }
      
      public function scopeActive($query)

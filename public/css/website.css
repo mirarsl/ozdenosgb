@@ -1599,3 +1599,9 @@ h2, h3, h4 {
 	object-fit: cover;
 	width: 100%;
 }
+.align-center{
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+}

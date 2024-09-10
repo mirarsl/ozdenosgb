@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Blog;
+use App\Client;
+use App\ClientCategory;
 use App\Message;
 use App\News;
 use App\Page;
@@ -26,9 +28,9 @@ class PageController extends Controller
     {
         $Page = Page::where('slug', $slug)->first();
         if (empty($Page))
-            abort(404);
-
-
+        abort(404);
+        
+        
         SEOTools::setTitle($Page->meta_title ?? $Page->title);
         SEOTools::setDescription($Page->meta_desc);
         SEOTools::setCanonical(url()->full());
@@ -41,10 +43,10 @@ class PageController extends Controller
         SEOTools::twitter()->setTitle(SEOTools::getTitle());
         SEOTools::jsonLd()->setTitle(SEOTools::getTitle());
         SEOTools::jsonLd()->addImage(url(asset($Page->image)));
-
+        
         return view("pages.template", compact("Page"));
     }
-
+    
     function detail(Request $request)
     {
         $route_name = \Route::currentRouteName();
@@ -57,9 +59,9 @@ class PageController extends Controller
             $View = $Re["View"] ?? null;
         }
         if (empty($Page) || empty($Meta))
-            abort(404);
-
-
+        abort(404);
+        
+        
         SEOTools::setTitle($Page->meta_title ?? $Page->title);
         SEOTools::setDescription($Page->meta_desc);
         SEOMeta::addKeyword(explode(',', $Page->meta_tags));
@@ -74,7 +76,7 @@ class PageController extends Controller
         SEOTools::jsonLd()->addImage(url(asset($Page->image)));
         return view("pages.details", compact("Page", "Meta", "Other", 'View'));
     }
-
+    
     function service(Request $request)
     {
         $segments = explode('/',$request->slug);
@@ -88,42 +90,71 @@ class PageController extends Controller
         }
         if (empty($Page)) abort(404);
         $Meta = Page::where('slug', 'hizmetlerimiz')->first();
-        $Other = Service::where("slug", '!=', $request->slug)->order()->active()->limit(4, 0)->get();
         $Route = 'service';
-
+        
         SEOTools::setTitle($Page->meta_title ?? $Page->title);
         SEOTools::setDescription($Page->meta_desc);
         SEOMeta::addKeyword(explode(',', $Page->meta_tags));
         SEOTools::setCanonical(url()->full());
         SEOTools::opengraph()->setTitle(SEOTools::getTitle());
         SEOTools::opengraph()->setUrl(url()->full());
-        SEOTools::opengraph()->addImage(url(asset($Page->image)));
+        if($Page->image != null){
+            SEOTools::opengraph()->addImage(url(asset($Page->image)));
+        }
         SEOTools::opengraph()->addProperty('type', 'articles');
         SEOTools::opengraph()->addProperty('locale', 'tr');
         SEOTools::twitter()->setTitle(SEOTools::getTitle());
         SEOTools::jsonLd()->setTitle(SEOTools::getTitle());
-        SEOTools::jsonLd()->addImage(url(asset($Page->image)));
-
-        return view('details.service-details',compact('Page','Other','Meta','Route'));
-        // return ['Page' => $Project, 'Other' => $Others, 'Meta' => $Meta, 'View' => 'project-details'];
-
+        if($Page->image != null){
+            SEOTools::jsonLd()->addImage(url(asset($Page->image)));
+        }
+        
+        return view('details.service-details',compact('Page','Meta','Route'));
     }
-    function news($slug)
-    {
-        $Meta = Page::where('slug', 'haberler')->first();
-        $News = News::where("slug", $slug)->active()->first();
-        $Others = News::where("slug", '!=', $slug)->order()->active()->limit(4, 0)->get();
-        return ['Page' => $News, 'Other' => $Others, 'Meta' => $Meta, 'Route' => 'news', 'View' => 'news-details'];
+    
+    function client_categories(Request $request){
+        $Meta = Page::where('slug', 'referanslar')->first();
+        if($request->slug == 'hepsi'){
+            $Page = (object)[
+                'meta_title' => "Bütün OSGB Referansları",
+                "meta_desc" => $Meta->meta_desc,
+                "meta_tags" => $Meta->meta_tags,
+                "image" => $Meta->image,
+                "title" => 'Bütün OSGB Referanslarımız',
+                "hero" => 'Düzenli olarak işyeri hekimi ve iş güvenliği uzmanı hizmeti verdiğimiz firmaları bu sayfada bulabilirsiniz.',
+                "slug" => 'hepsi',
+            ];
+            $List = Client::order()->get();
+            if (empty($List)) abort(404);
+        }else{
+            $Page = ClientCategory::where('slug',$request->slug)->first();
+            if (empty($Page)) abort(404);
+            $List = $Page->data()->order()->get();
+        }
+        $Route = 'client-categories';
+        
+        
+        SEOTools::setTitle($Page->meta_title ?? $Page->title);
+        SEOTools::setDescription($Page->meta_desc);
+        SEOMeta::addKeyword(explode(',', $Page->meta_tags));
+        SEOTools::setCanonical(url()->full());
+        SEOTools::opengraph()->setTitle(SEOTools::getTitle());
+        SEOTools::opengraph()->setUrl(url()->full());
+        if($Page->image != null){
+            SEOTools::opengraph()->addImage(url(asset($Page->image)));
+        }
+        SEOTools::opengraph()->addProperty('type', 'articles');
+        SEOTools::opengraph()->addProperty('locale', 'tr');
+        SEOTools::twitter()->setTitle(SEOTools::getTitle());
+        SEOTools::jsonLd()->setTitle(SEOTools::getTitle());
+        if($Page->image != null){
+            SEOTools::jsonLd()->addImage(url(asset($Page->image)));
+        }
+        
+        return view('details.client-category-details',compact('Page','Meta','Route','List'));
     }
-
-    function blog($slug)
-    {
-        $Meta = Page::where('slug', 'blog')->first();
-        $Blogs = Blog::where("slug", $slug)->active()->first();
-        $Others = Blog::where("slug", '!=', $slug)->order()->active()->limit(4, 0)->get();
-        return ['Page' => $Blogs, 'Other' => $Others, 'Meta' => $Meta, 'Route' => 'blog', 'View' => 'blog-details'];
-    }
-
+    
+    
     function store(Request $request)
     {
         $validator = Validator::make(
@@ -134,61 +165,54 @@ class PageController extends Controller
             ],
             [
                 "json.*.required" => "Bu alan zorunludur.",
-            ]
-        );
-        if ($validator->fails()) {
-            return redirect()->to(url()->previous())->with('dialog', '1')->with('status', 'error')->with('message', 'Lütfen tüm form alanlarını kontrol edin.')->withErrors($validator)->withInput(request()->all());
-        }
-
-        $validated = $validator->validate();
-
-        if ($request->hasFile('json.file')) {
-            $file = $request->file('json.file');
-            $fileLocation = Storage::disk('public')->put('hr/', $file);
-            $validated['json']['file'] = $fileLocation;
-        }
-
-        $Store = new Message();
-        $Store->type = $validated['type'];
-        $Store->json = json_encode($validated['json']);
-
-
-
-
-        if ($Store->save()) {
-            if (setting('site.mail') !== null) {
-                // SMTP Ayarları
-                Mail::send('mail.default', $validated, function ($msg) use ($validated) {
-                    $msg->from(env('MAIL_USERNAME'), setting('site.title'));
-                    $msg->to(setting('site.mail'), setting('site.title'));
-                    $msg->subject($validated['type']);
-                });
+                ]
+            );
+            if ($validator->fails()) {
+                return redirect()->to(url()->previous())->with('dialog', '1')->with('status', 'error')->with('message', 'Lütfen tüm form alanlarını kontrol edin.')->withErrors($validator)->withInput(request()->all());
             }
-
-
-            return redirect()->to(url()->previous())->with('dialog', '1')->with('status', 'success')->with('message', 'Mesajınız başarıyla iletildi.');
-        } else {
-            return redirect()->to(url()->previous())->with('dialog', '1')->with('status', 'error')->with('message', 'Mesajınız iletilirken bir hata oluştu. Lütfen daha sonra tekrar deneyin.');
+            
+            $validated = $validator->validate();
+            
+            if ($request->hasFile('json.file')) {
+                $file = $request->file('json.file');
+                $fileLocation = Storage::disk('public')->put('hr/', $file);
+                $validated['json']['file'] = $fileLocation;
+            }
+            
+            $Store = new Message();
+            $Store->type = $validated['type'];
+            $Store->json = json_encode($validated['json']);
+            
+            
+            
+            
+            if ($Store->save()) {
+                if (setting('site.mail') !== null) {
+                    // SMTP Ayarları
+                    Mail::send('mail.default', $validated, function ($msg) use ($validated) {
+                        $msg->from(env('MAIL_USERNAME'), setting('site.title'));
+                        $msg->to(setting('site.mail'), setting('site.title'));
+                        $msg->subject($validated['type']);
+                    });
+                }
+                
+                
+                return redirect()->to(url()->previous())->with('dialog', '1')->with('status', 'success')->with('message', 'Mesajınız başarıyla iletildi.');
+            } else {
+                return redirect()->to(url()->previous())->with('dialog', '1')->with('status', 'error')->with('message', 'Mesajınız iletilirken bir hata oluştu. Lütfen daha sonra tekrar deneyin.');
+            }
+            
         }
-
+        
+        function sitemap()
+        {
+            $Page = Page::all()->except(1);
+            $Projects = Project::active()->get();
+            $Plans = Plan::active()->get();
+            $News = Blog::active()->get();
+            
+            $content = view('sitemap.index', compact('Page', 'Projects','Plans','News'));
+            return response($content)->header('Content-Type', 'application/xml');
+        }
     }
-
-    function sitemap()
-    {
-        $Page = Page::all()->except(1);
-        $Projects = Project::active()->get();
-        $Plans = Plan::active()->get();
-        $News = Blog::active()->get();
-
-        $content = view('sitemap.index', compact('Page', 'Projects','Plans','News'));
-        return response($content)->header('Content-Type', 'application/xml');
-    }
-
-    function floors(Request $request) {
-        return ProjectBlockApartment::where('block_id',$request->block_id)->where('type',1)->select(['floor as kat'])->groupBy('floor')->get();
-    }
-
-    function apartments(Request $request) {
-        return ProjectBlockApartment::where('block_id',$request->block_id)->where('type',1)->where('floor',$request->kat)->select(['number AS daire','plan as daire_plani'])->get();
-    }
-}
+    

@@ -9,6 +9,6 @@ class Client extends Model
 {
  public function scopeOrder($query)
  {
-     return $query->orderBy('ordering')->orderBy('id','desc')->orderBy('title','ASC');
+     return $query->orderBy('ordering')->orderBy('featured','DESC')->orderBy('title','ASC');
  }
 }

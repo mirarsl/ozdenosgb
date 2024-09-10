@@ -24,6 +24,7 @@
     </ol>
 </div>
 @if (!(empty($Page->data())))
+
     @if (View::exists('modules.' . $Page->list_name))
         @include('modules.' . $Page->list_name, ['module' => $Page])
     @endif

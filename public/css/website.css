@@ -514,7 +514,7 @@ img.grayscale:hover {
 	border-radius: 4px;
 	transition: 0.2s;
 	text-align: center;
-	height: 200px;
+	min-height: 320px;
 }
 
 .ref-panel > div > a {

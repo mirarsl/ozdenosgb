@@ -38,7 +38,7 @@
 			<meta itemprop="position" content="2" />
 		</li>
 		<li class="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-			<a href="{{route($Route,$Page->slug)}}" title="İş Güvenliği Uzmanı Hizmeti" itemprop="item">
+			<a href="{{route($Route,$Page->slug)}}" title="{{setting('site.title')}} {{$Page->title}}" itemprop="item">
 				<span itemprop="name">{{$Page->title}}</span>
 			</a>
 			<meta itemprop="position" content="3" />

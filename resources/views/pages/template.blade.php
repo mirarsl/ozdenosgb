@@ -3,13 +3,16 @@
 <div class="page-image-header">
     <div class="container">
         <h1>{{$Page->title}}</h1>
-        {!! $Page->text !!}
+        <p>{{$Page->hero}}</p>
     </div>
 </div>
+@hasSection ('breadcrumb')
+@yield('breadcrumb')
+@else
 <div class="container breadcrumb-container">
     <ol class="breadcrumb" itemscope itemtype="http://schema.org/BreadcrumbList">
         <li itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-            <a href="Anasayfa" title="{{setting('site.title')}} Anasayfası" itemprop="item">
+            <a href="{{route('home')}}" title="{{setting('site.title')}} Anasayfası" itemprop="item">
                 <i class="fa fa-home"></i> 
                 <span itemprop="name">Anasayfa</span>
             </a>
@@ -23,19 +26,23 @@
         </li>
     </ol>
 </div>
+@endif
 @if (!(empty($Page->data())))
-
-    @if (View::exists('modules.' . $Page->list_name))
-        @include('modules.' . $Page->list_name, ['module' => $Page])
-    @endif
+@if (View::exists('modules.' . $Page->list_name))
+@include('modules.' . $Page->list_name, ['module' => $Page])
+@endif
+@elseif($Page->list_name)
+@if (View::exists('modules.' . $Page->list_name))
+@include('modules.' . $Page->list_name, ['module' => $Page])
+@endif
 @endif
 @isset($Page->modules)
-    @forelse ($Page->modules as $module)
-        @if (View::exists('modules.' . $module->slug))
-            @include('modules.' . $module->slug, ['module' => $module])
-        @endif
-    @empty
-    @endforelse
+@forelse ($Page->modules as $module)
+@if (View::exists('modules.' . $module->slug))
+@include('modules.' . $module->slug, ['module' => $module])
+@endif
+@empty
+@endforelse
 @endisset
 @yield('modules')
 @endsection

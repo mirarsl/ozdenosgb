@@ -22,8 +22,12 @@ class Page extends Model
                 }
             }
         }
-        $data = $data->orderBy('ordering')->orderBy('id','desc');
-        $data = $data->paginate(12);
+        
+        if(Schema::hasColumn(app($page->model_name)->getTable(), 'ordering')) {
+            $data = $data->orderBy('ordering');
+        }
+        $data = $data->orderBy('id','desc');
+        $data = $data->get();
         if(empty($data)) return false;
         return $data;
     }

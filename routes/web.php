@@ -28,13 +28,12 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('{slug}', [PageController::class,'index'])->name('page');
 Route::get('hizmet/{slug?}', [PageController::class,'service'])->name('service')->where('slug','.*');
 Route::get('referanslar/{slug}', [PageController::class,'client_categories'])->name('client-categories');
+Route::get('basinda-biz/{slug}', [PageController::class,'news'])->name('news');
+Route::get('akreditasyon/{slug}', [PageController::class,'accreditation'])->name('accreditation');
 
 
 
 
-
-Route::get('haber/{slug}', [PageController::class,'detail'])->name('news');
 Route::get('blog/{slug}', [PageController::class,'detail'])->name('blog');
-Route::get('akreditasyon/{slug}', [PageController::class,'detail'])->name('accreditation');
 
 

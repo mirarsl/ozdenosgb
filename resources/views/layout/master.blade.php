@@ -126,7 +126,6 @@
 			if ($(this).children().length === 0) {
 				var htmlContent = this.outerHTML;
 				if (htmlContent) {
-					console.log(htmlContent);
 					if (htmlContent.includes('https://ozdenosgb.com') || htmlContent.includes('https://www.ozdenosgb.com')) {
 						this.outerHTML = htmlContent.replace(/https:\/\/(www\.)?ozdenosgb\.com/g, @if(env('APP_ENV') == 'local') 'http://ozdenosgb.test' @else 'https://ozdenosgb.bario.com.tr'  @endif );
 					}

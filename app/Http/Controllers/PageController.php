@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Accreditation;
 use App\Blog;
 use App\Client;
 use App\ClientCategory;
@@ -47,35 +48,35 @@ class PageController extends Controller
         return view("pages.template", compact("Page"));
     }
     
-    function detail(Request $request)
-    {
-        $route_name = \Route::currentRouteName();
-        $route_name = str_replace('-', '_', $route_name);
-        if (method_exists($this, $route_name)) {
-            $Re = $this->$route_name($request->slug);
-            $Page = $Re["Page"];
-            $Meta = $Re["Meta"];
-            $Other = $Re["Other"];
-            $View = $Re["View"] ?? null;
-        }
-        if (empty($Page) || empty($Meta))
-        abort(404);
+    // function detail(Request $request)
+    // {
+    //     $route_name = \Route::currentRouteName();
+    //     $route_name = str_replace('-', '_', $route_name);
+    //     if (method_exists($this, $route_name)) {
+    //         $Re = $this->$route_name($request->slug);
+    //         $Page = $Re["Page"];
+    //         $Meta = $Re["Meta"];
+    //         $Other = $Re["Other"];
+    //         $View = $Re["View"] ?? null;
+    //     }
+    //     if (empty($Page) || empty($Meta))
+    //     abort(404);
         
         
-        SEOTools::setTitle($Page->meta_title ?? $Page->title);
-        SEOTools::setDescription($Page->meta_desc);
-        SEOMeta::addKeyword(explode(',', $Page->meta_tags));
-        SEOTools::setCanonical(url()->full());
-        SEOTools::opengraph()->setTitle(SEOTools::getTitle());
-        SEOTools::opengraph()->setUrl(url()->full());
-        SEOTools::opengraph()->addImage(url(asset($Page->image)));
-        SEOTools::opengraph()->addProperty('type', 'articles');
-        SEOTools::opengraph()->addProperty('locale', 'tr');
-        SEOTools::twitter()->setTitle(SEOTools::getTitle());
-        SEOTools::jsonLd()->setTitle(SEOTools::getTitle());
-        SEOTools::jsonLd()->addImage(url(asset($Page->image)));
-        return view("pages.details", compact("Page", "Meta", "Other", 'View'));
-    }
+    //     SEOTools::setTitle($Page->meta_title ?? $Page->title);
+    //     SEOTools::setDescription($Page->meta_desc);
+    //     SEOMeta::addKeyword(explode(',', $Page->meta_tags));
+    //     SEOTools::setCanonical(url()->full());
+    //     SEOTools::opengraph()->setTitle(SEOTools::getTitle());
+    //     SEOTools::opengraph()->setUrl(url()->full());
+    //     SEOTools::opengraph()->addImage(url(asset($Page->image)));
+    //     SEOTools::opengraph()->addProperty('type', 'articles');
+    //     SEOTools::opengraph()->addProperty('locale', 'tr');
+    //     SEOTools::twitter()->setTitle(SEOTools::getTitle());
+    //     SEOTools::jsonLd()->setTitle(SEOTools::getTitle());
+    //     SEOTools::jsonLd()->addImage(url(asset($Page->image)));
+    //     return view("pages.details", compact("Page", "Meta", "Other", 'View'));
+    // }
     
     function service(Request $request)
     {
@@ -152,6 +153,62 @@ class PageController extends Controller
         }
         
         return view('details.client-category-details',compact('Page','Meta','Route','List'));
+    }
+
+    function news(Request $request){
+        $Meta = Page::where('slug', 'basinda-biz')->first();
+        
+        $Page = News::where('slug',$request->slug)->first();
+        if (empty($Page)) abort(404);
+        $Route = 'news';
+        
+        
+        SEOTools::setTitle($Page->meta_title ?? $Page->title);
+        SEOTools::setDescription($Page->meta_desc);
+        SEOMeta::addKeyword(explode(',', $Page->meta_tags));
+        SEOTools::setCanonical(url()->full());
+        SEOTools::opengraph()->setTitle(SEOTools::getTitle());
+        SEOTools::opengraph()->setUrl(url()->full());
+        if($Page->image != null){
+            SEOTools::opengraph()->addImage(url(asset($Page->image)));
+        }
+        SEOTools::opengraph()->addProperty('type', 'articles');
+        SEOTools::opengraph()->addProperty('locale', 'tr');
+        SEOTools::twitter()->setTitle(SEOTools::getTitle());
+        SEOTools::jsonLd()->setTitle(SEOTools::getTitle());
+        if($Page->image != null){
+            SEOTools::jsonLd()->addImage(url(asset($Page->image)));
+        }
+        
+        return view('details.news-details',compact('Page','Meta', 'Route'));
+    }
+
+    function accreditation(Request $request){
+        $Meta = Page::where('slug', 'akreditasyonlarimiz')->first();
+        
+        $Page = Accreditation::where('slug',$request->slug)->first();
+        if (empty($Page)) abort(404);
+        $Route = 'accreditation';
+        
+        
+        SEOTools::setTitle($Page->meta_title ?? $Page->title);
+        SEOTools::setDescription($Page->meta_desc);
+        SEOMeta::addKeyword(explode(',', $Page->meta_tags));
+        SEOTools::setCanonical(url()->full());
+        SEOTools::opengraph()->setTitle(SEOTools::getTitle());
+        SEOTools::opengraph()->setUrl(url()->full());
+        if($Page->image != null){
+            SEOTools::opengraph()->addImage(url(asset($Page->image)));
+        }
+        SEOTools::opengraph()->addProperty('type', 'articles');
+        SEOTools::opengraph()->addProperty('locale', 'tr');
+        SEOTools::twitter()->setTitle(SEOTools::getTitle());
+        SEOTools::jsonLd()->setTitle(SEOTools::getTitle());
+        if($Page->image != null){
+            SEOTools::jsonLd()->addImage(url(asset($Page->image)));
+        }
+        
+        return view('details.accreditation-details',compact('Page','Meta', 'Route'));
     }
     
     

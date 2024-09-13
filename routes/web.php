@@ -30,6 +30,7 @@ Route::get('hizmet/{slug?}', [PageController::class,'service'])->name('service')
 Route::get('referanslar/{slug}', [PageController::class,'client_categories'])->name('client-categories');
 Route::get('basinda-biz/{slug}', [PageController::class,'news'])->name('news');
 Route::get('akreditasyon/{slug}', [PageController::class,'accreditation'])->name('accreditation');
+Route::get('afis/{slug}', [PageController::class,'posters'])->name('posters');
 
 
 

@@ -10,6 +10,7 @@ use App\Message;
 use App\News;
 use App\Page;
 use App\Plan;
+use App\Poster;
 use App\Project;
 use App\ProjectBlockApartment;
 use App\Service;
@@ -209,6 +210,34 @@ class PageController extends Controller
         }
         
         return view('details.accreditation-details',compact('Page','Meta', 'Route'));
+    }
+
+    function posters(Request $request){
+        $Meta = Page::where('slug', 'afis')->first();
+        
+        $Page = Poster::where('slug',$request->slug)->first();
+        if (empty($Page)) abort(404);
+        $Route = 'posters';
+        
+        
+        SEOTools::setTitle($Page->meta_title ?? $Page->title);
+        SEOTools::setDescription($Page->meta_desc);
+        SEOMeta::addKeyword(explode(',', $Page->meta_tags));
+        SEOTools::setCanonical(url()->full());
+        SEOTools::opengraph()->setTitle(SEOTools::getTitle());
+        SEOTools::opengraph()->setUrl(url()->full());
+        if($Page->image != null){
+            SEOTools::opengraph()->addImage(url(asset($Page->image)));
+        }
+        SEOTools::opengraph()->addProperty('type', 'articles');
+        SEOTools::opengraph()->addProperty('locale', 'tr');
+        SEOTools::twitter()->setTitle(SEOTools::getTitle());
+        SEOTools::jsonLd()->setTitle(SEOTools::getTitle());
+        if($Page->image != null){
+            SEOTools::jsonLd()->addImage(url(asset($Page->image)));
+        }
+        
+        return view('details.poster-details',compact('Page','Meta', 'Route'));
     }
     
     

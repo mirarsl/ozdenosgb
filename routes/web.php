@@ -31,6 +31,7 @@ Route::get('referanslar/{slug}', [PageController::class,'client_categories'])->n
 Route::get('basinda-biz/{slug}', [PageController::class,'news'])->name('news');
 Route::get('akreditasyon/{slug}', [PageController::class,'accreditation'])->name('accreditation');
 Route::get('afis/{slug}', [PageController::class,'posters'])->name('posters');
+Route::get('sunum/{slug}', [PageController::class,'presentation'])->name('presentation');
 
 
 

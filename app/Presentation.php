@@ -5,7 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 
-class Poster extends Model
+class Presentation extends Model
 {
  public function scopeActive($query)
  {
@@ -14,5 +14,5 @@ class Poster extends Model
  public function scopeOrder($query)
  {
   return $query->orderBy('ordering')->orderBy('id', 'desc');
- }    
+ }
 }

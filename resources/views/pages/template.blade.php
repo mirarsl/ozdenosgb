@@ -36,6 +36,9 @@
 @include('modules.' . $Page->list_name, ['module' => $Page])
 @endif
 @endif
+@hasSection ('modules')
+@yield('modules')
+@else
 @isset($Page->modules)
 @forelse ($Page->modules as $module)
 @if (View::exists('modules.' . $module->slug))
@@ -44,5 +47,5 @@
 @empty
 @endforelse
 @endisset
-@yield('modules')
+@endif
 @endsection

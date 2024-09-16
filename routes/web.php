@@ -32,6 +32,7 @@ Route::get('basinda-biz/{slug}', [PageController::class,'news'])->name('news');
 Route::get('akreditasyon/{slug}', [PageController::class,'accreditation'])->name('accreditation');
 Route::get('afis/{slug}', [PageController::class,'posters'])->name('posters');
 Route::get('sunum/{slug}', [PageController::class,'presentation'])->name('presentation');
+Route::get('kapsama-alani/{slug}', [PageController::class,'coverage'])->name('coverage');
 
 
 

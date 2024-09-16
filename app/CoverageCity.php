@@ -16,6 +16,6 @@ class CoverageCity extends Model
  }
  public function scopeOrder($query)
  {
-  return $query->orderBy('ordering')->orderBy('id', 'desc');
+  return $query->orderBy('ordering')->orderBy('code', 'asc');
  }
 }

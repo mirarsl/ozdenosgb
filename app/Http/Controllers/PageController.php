@@ -275,6 +275,33 @@ class PageController extends Controller
         
         return view('details.coverage-details',compact('Page','Meta', 'Route'));
     }
+
+    function blog(Request $request){
+        $Meta = Page::where('slug', 'blog')->first();
+        $Page = Blog::where('slug',$request->slug)->first();
+        if (empty($Page)) abort(404);
+        $Route = 'blog';
+        
+        
+        SEOTools::setTitle($Page->meta_title ?? $Page->title);
+        SEOTools::setDescription($Page->meta_desc);
+        SEOMeta::addKeyword(explode(',', $Page->meta_tags));
+        SEOTools::setCanonical(url()->full());
+        SEOTools::opengraph()->setTitle(SEOTools::getTitle());
+        SEOTools::opengraph()->setUrl(url()->full());
+        if($Page->image != null){
+            SEOTools::opengraph()->addImage(url(asset($Page->image)));
+        }
+        SEOTools::opengraph()->addProperty('type', 'articles');
+        SEOTools::opengraph()->addProperty('locale', 'tr');
+        SEOTools::twitter()->setTitle(SEOTools::getTitle());
+        SEOTools::jsonLd()->setTitle(SEOTools::getTitle());
+        if($Page->image != null){
+            SEOTools::jsonLd()->addImage(url(asset($Page->image)));
+        }
+        
+        return view('details.blog-details',compact('Page','Meta', 'Route'));
+    }
     
     
     function store(Request $request)

@@ -6,7 +6,7 @@
   @foreach ($Page->data() as $item)
   <div class="row tarihce">
    <div class="col-md-3">
-    <b>{{ \Carbon\Carbon::parse($item->created_at)->locale('tr')->isoFormat('D MMMM dddd') }}</b>
+    <b>{{ \Carbon\Carbon::parse($item->created_at)->locale('tr')->isoFormat('D MMMM YYYY dddd') }}</b>
    </div>
    <div class="col-md-5">
     {!! $item->text !!}

@@ -23,7 +23,7 @@ class CovidChronology extends Model
    case 1:
     return '<a target="_blank" href="'.$this->url.'">
 						<div class="thumbnail">
-							<img src="'.url(asset($this->image)).'" alt="'.$this->title.'">
+							<img class="img-responsive" src="'.url(asset($this->image)).'" alt="'.$this->title.'">
 						</div>
 					</a>';
    case 2:

@@ -25,7 +25,6 @@ Route::group(['prefix' => 'admin'], function () {
 Route::get('sitemap.xml', [PageController::class, 'sitemap'])->name('sitemap');
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-Route::get('{slug?}', [PageController::class,'index'])->name('page')->where('slug','.*');
 Route::get('hizmet/{slug?}', [PageController::class,'service'])->name('service')->where('slug','.*');
 Route::get('referanslar/{slug}', [PageController::class,'client_categories'])->name('client-categories');
 Route::get('basinda-biz/{slug}', [PageController::class,'news'])->name('news');
@@ -33,6 +32,8 @@ Route::get('akreditasyon/{slug}', [PageController::class,'accreditation'])->name
 Route::get('afis/{slug}', [PageController::class,'posters'])->name('posters');
 Route::get('sunum/{slug}', [PageController::class,'presentation'])->name('presentation');
 Route::get('kapsama-alani/{slug}', [PageController::class,'coverage'])->name('coverage');
+
+Route::get('{slug?}', [PageController::class,'index'])->name('page')->where('slug','.*');
 
 
 

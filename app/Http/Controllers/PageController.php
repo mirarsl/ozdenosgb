@@ -194,7 +194,7 @@ class PageController extends Controller
     
     function posters(Request $request){
         $Meta = Page::where('slug', 'afis')->first();
-        
+
         $Page = Poster::where('slug',$request->slug)->first();
         if (empty($Page)) abort(404);
         $Route = 'posters';

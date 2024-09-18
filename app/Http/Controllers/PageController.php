@@ -28,11 +28,19 @@ use Illuminate\Support\Str;
 
 class PageController extends Controller
 {
-    function index($slug)
+    function index(Request $request)
     {
-        $Page = Page::where('slug', $slug)->first();
-        if (empty($Page))
-        abort(404);
+        $segments = explode('/',$request->slug);
+        foreach ($segments as $key => $value) {
+            if($key == 0){
+                $Page = Page::where('slug', $value)->where('top_page',null)->first();
+            }else{
+                $Page = $Page->pages()->where('slug',$value)->first();
+            }
+            if (empty($Page)) abort(404);
+        }
+        // return $Page;
+        if (empty($Page)) abort(404);
         
         
         SEOTools::setTitle($Page->meta_title ?? $Page->title);
@@ -50,36 +58,6 @@ class PageController extends Controller
         
         return view("pages.template", compact("Page"));
     }
-    
-    // function detail(Request $request)
-    // {
-    //     $route_name = \Route::currentRouteName();
-    //     $route_name = str_replace('-', '_', $route_name);
-    //     if (method_exists($this, $route_name)) {
-    //         $Re = $this->$route_name($request->slug);
-    //         $Page = $Re["Page"];
-    //         $Meta = $Re["Meta"];
-    //         $Other = $Re["Other"];
-    //         $View = $Re["View"] ?? null;
-    //     }
-    //     if (empty($Page) || empty($Meta))
-    //     abort(404);
-        
-        
-    //     SEOTools::setTitle($Page->meta_title ?? $Page->title);
-    //     SEOTools::setDescription($Page->meta_desc);
-    //     SEOMeta::addKeyword(explode(',', $Page->meta_tags));
-    //     SEOTools::setCanonical(url()->full());
-    //     SEOTools::opengraph()->setTitle(SEOTools::getTitle());
-    //     SEOTools::opengraph()->setUrl(url()->full());
-    //     SEOTools::opengraph()->addImage(url(asset($Page->image)));
-    //     SEOTools::opengraph()->addProperty('type', 'articles');
-    //     SEOTools::opengraph()->addProperty('locale', 'tr');
-    //     SEOTools::twitter()->setTitle(SEOTools::getTitle());
-    //     SEOTools::jsonLd()->setTitle(SEOTools::getTitle());
-    //     SEOTools::jsonLd()->addImage(url(asset($Page->image)));
-    //     return view("pages.details", compact("Page", "Meta", "Other", 'View'));
-    // }
     
     function service(Request $request)
     {
@@ -157,7 +135,7 @@ class PageController extends Controller
         
         return view('details.client-category-details',compact('Page','Meta','Route','List'));
     }
-
+    
     function news(Request $request){
         $Meta = Page::where('slug', 'basinda-biz')->first();
         
@@ -185,7 +163,7 @@ class PageController extends Controller
         
         return view('details.news-details',compact('Page','Meta', 'Route'));
     }
-
+    
     function accreditation(Request $request){
         $Meta = Page::where('slug', 'akreditasyonlarimiz')->first();
         
@@ -213,7 +191,7 @@ class PageController extends Controller
         
         return view('details.accreditation-details',compact('Page','Meta', 'Route'));
     }
-
+    
     function posters(Request $request){
         $Meta = Page::where('slug', 'afis')->first();
         
@@ -241,7 +219,7 @@ class PageController extends Controller
         
         return view('details.poster-details',compact('Page','Meta', 'Route'));
     }
-
+    
     function presentation(Request $request){
         $Meta = Page::where('slug', 'sunum')->first();
         
@@ -269,7 +247,7 @@ class PageController extends Controller
         
         return view('details.presentation-details',compact('Page','Meta', 'Route'));
     }
-
+    
     function coverage(Request $request){
         $Meta = Page::where('slug', 'kapsama-alanimiz')->first();
         

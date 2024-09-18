@@ -11,6 +11,18 @@ class Page extends Model
         return $this->belongsToMany(Module::class,"page_modules",'page_id','module_id');
      }
 
+     function pages() {
+        return $this->hasMany(Page::class,'top_page');
+     }
+
+     function top() {
+        return $this->belongsTo(Page::class,'top_page');
+     }
+
+     function allPages() {
+        return $this->top()->with('pages')->get();
+     }
+
      function data() {
         $page = $this->belongsTo(\TCG\Voyager\Models\DataType::class,'table','id')->first();
         if(empty($page)) return null;
@@ -30,5 +42,31 @@ class Page extends Model
         $data = $data->get();
         if(empty($data)) return false;
         return $data;
+    }
+
+    function allParent() {
+        $parents = collect();
+        $this->allParentRec($this, $parents);
+        return $parents;
+    }
+    
+    function allParentRec($service, &$parents) {
+        if ($service->top) {
+            $parents->push($service->top()->select('title','slug')->first());
+            $this->allParentRec($service->top, $parents);
+        }
+    }
+    function fullSlug()
+    {
+        $slugs = [];
+        $this->fullSlugRec($this, $slugs);
+        return implode('/',array_reverse($slugs));
+    }
+    function fullSlugRec($page, &$slug)
+    {
+        $slug[] = $page->slug;
+        if (isset($page->top)) {
+            $this->fullSlugRec($page->top, $slug);
+        }
     }
 }

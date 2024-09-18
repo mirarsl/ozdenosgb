@@ -18,11 +18,19 @@
             </a>
             <meta itemprop="position" content="1" />
         </li>
+        @foreach ($Page->allParent() as $item)
         <li class="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
-            <a href="{{route('page',$Page->slug)}}" title="{{$Page->title}}" itemprop="item">
+            <a href="{{route('page',$item->fullSlug())}}" title="{{$item->title}}" itemprop="item">
+                <span itemprop="name">{{$item->title}}</span>
+            </a>
+            <meta itemprop="position" content="{{$loop->index + 3}}" />
+        </li>
+        @endforeach
+        <li class="active" itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+            <a href="{{route('page',$Page->fullSlug())}}" title="{{$Page->title}}" itemprop="item">
                 <span itemprop="name">{{$Page->title}}</span>
             </a>
-            <meta itemprop="position" content="2" />
+            <meta itemprop="position" content="{{count($Page->allParent()) + 3}}" />
         </li>
     </ol>
 </div>

@@ -9,7 +9,7 @@
     <b>{{ \Carbon\Carbon::parse($item->created_at)->locale('tr')->isoFormat('D MMMM dddd') }}</b>
    </div>
    <div class="col-md-5">
-    {!! $item->title !!}
+    {!! $item->text !!}
    </div>
    <div class="col-md-4">
     {!! $item->getType() !!}

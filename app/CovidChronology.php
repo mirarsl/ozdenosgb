@@ -29,7 +29,7 @@ class CovidChronology extends Model
    case 2:
     return '<iframe width="100%" height="200" src="'.$this->url.'" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
    case 3:
-    return '<div class="text-center">'.$this->title.'</div>';
+    return '<a target="_blank" href="'.$this->url.'">'.$this->title.'</a>';
    case 4:
     return '';
   }

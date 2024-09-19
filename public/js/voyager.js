@@ -18,6 +18,11 @@ $(window).on('load', function () {
             description: 'Kırmızı Background Beyaz Text Alert',
             content: '<div class="ilgi"><a style="font-size:22px; color:white;" href="#" class="text-center"><p> İçeriğiniz Buraya Gelecek </p></a></div>'
          }, 
+         {
+            title: 'İlginizi Çekebilir',
+            description: 'İlginizi Çekebilir İSG Videoları',
+            content: '<div class="ilgi"><a style="font-size:22px;" href="/isg-videolari"><div class="row"><div class="col-xs-3 col-md-2"><img src="/img/index/video-icon.png" alt="isg videoları" class="img-responsive"></div><div class="col-xs-8 col-md-10"><p>İLGİNİZİ ÇEKEBİLİR!</p><p class="sub"><u>İSG Videoları</u></p></div></div></a></div>'
+         }, 
       ],
       init_instance_callback: (editor) => {
          console.log(editor);

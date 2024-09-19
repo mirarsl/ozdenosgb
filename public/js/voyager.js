@@ -26,7 +26,12 @@ $(window).on('load', function () {
          {
             title: 'Card Danger',
             description:"Bootstrap Card",
-            content:'<div class="panel panel-danger"><div class="panel-heading"><b>Eski Hali</b></div><div class="panel-body"></div></div>',
+            content:'<div class="panel panel-danger"><div class="panel-heading"><b>Başlık</b></div><div class="panel-body"></div></div>',
+         },
+         {
+            title: 'Card Info',
+            description:"Bootstrap Card",
+            content:'<div class="panel panel-primary"><div class="panel-heading"><b>Başlık</b></div><div class="panel-body"></div></div>',
          }
       ],
       init_instance_callback: (editor) => {

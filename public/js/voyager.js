@@ -9,7 +9,7 @@ $(window).on('load', function () {
       menubar: true,
       image_advtab: true,
       base_url: '',
-      toolbar: 'undo redo | styleselect | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | outdent indent | bullist numlist | forecolor backcolor | fontsizeselect fontselect | link image media | code template | removeformat | cut copy paste | subscript superscript | table | hr | print | preview | anchor | pagebreak | spellchecker | searchreplace | visualblocks visualchars | charmap | emoticons | fullscreen | insertdatetime | nonbreaking | save | directionality | paste textpattern | help',
+      toolbar: 'undo redo | styleselect | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | outdent indent | bullist numlist | forecolor backcolor | fontsizeselect fontselect | link image media | code template | removeformat | subscript superscript | table | hr | preview | anchor | spellchecker | searchreplace | visualblocks visualchars | charmap | emoticons | fullscreen | insertdatetime | nonbreaking | save | directionality | print',
       plugins: 'advlist autolink link image lists charmap print preview hr anchor pagebreak searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking save table directionality template paste textpattern ',
       style_formats: [
          { title: 'Headers', items: [
@@ -62,6 +62,11 @@ $(window).on('load', function () {
             title: 'Card Info',
             description:"Bootstrap Card",
             content:'<div class="panel panel-primary"><div class="panel-heading"><b>Başlık</b></div><div class="panel-body"></div></div>',
+         },
+         {
+            title:"Buton",
+            description:"Bootstrap Buton",
+            content:'<a class="btn btn-primary btn-lg" href="#" title="">Buton Başlığı</a>'
          }
       ],
       init_instance_callback: (editor) => {

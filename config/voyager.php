@@ -191,7 +191,15 @@ return [
     ],
 
     'additional_js' => [
-        '../js/voyager.js',
+        '/js/voyager.js',
+        '/js/tinymce.min.js',
+        '/js/plugins/template/plugin.min.js',
+        '/js/plugins/advtemplate/plugin.min.js',
+        '/js/plugins/link/plugin.min.js',
+        '/js/plugins/image/plugin.min.js',
+        '/js/plugins/table/plugin.min.js',
+        '/js/plugins/lists/plugin.min.js',
+        '/js/plugins/code/plugin.min.js',
     ],
 
     'googlemaps' => [

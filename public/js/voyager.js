@@ -23,6 +23,10 @@ $(window).on('load', function () {
             description: 'İlginizi Çekebilir İSG Videoları',
             content: '<div class="ilgi"><div class="row"><div class="col-xs-3 col-md-2"><img src="/img/index/video-icon.png" alt="isg videoları" class="img-responsive"></div><div class="col-xs-8 col-md-10"><p>İLGİNİZİ ÇEKEBİLİR!</p><p class="sub"><a style="font-size:22px;" target="_blank" href="/isg-videolari"><u>İSG Videoları</u></a></p></div></div></div>'
          }, 
+         {
+            title: 'Kart Danger',
+            content:'<div class="panel panel-danger"><div class="panel-heading"><b>Eski Hali</b></div><div class="panel-body"></div></div>'
+         }
       ],
       init_instance_callback: (editor) => {
       },

@@ -25,7 +25,6 @@ $(window).on('load', function () {
          }, 
       ],
       init_instance_callback: (editor) => {
-         console.log(editor);
       },
    };
    // Sadece myettings'deki yeni özellikleri settings'e ekleyin

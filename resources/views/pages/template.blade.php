@@ -43,6 +43,8 @@
 @if (View::exists('modules.' . $Page->list_name))
 @include('modules.' . $Page->list_name, ['module' => $Page])
 @endif
+@else
+@include('modules.details', ['module' => $Page])
 @endif
 @hasSection ('modules')
 @yield('modules')

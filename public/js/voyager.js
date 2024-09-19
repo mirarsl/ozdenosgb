@@ -11,7 +11,7 @@ $(window).on('load', function () {
       base_url: '',
       plugins: 'template link image table code lists',
       toolbar: 'styleselect | bold italic underline | forecolor backcolor | alignleft aligncenter alignright | bullist numlist outdent indent | link image table | code template',
-      content_css: '/css/voyagers.css',
+      content_css: '/css/voyager_tinymce.css',
       templates: [
          {
             title: 'Kırmızı Background Beyaz Text Alert',

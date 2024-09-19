@@ -16,6 +16,7 @@
 	<link rel="icon" href="favicon.ico" type="image/x-icon">
 	@stack('links')
 	{!! setting('site.header_libs') !!}
+	@stack('styles')
 </head>
 <body>
 	<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">

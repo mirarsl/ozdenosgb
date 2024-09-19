@@ -1,25 +1,29 @@
-function tinymce_setup_callback(editor)
-{
-   tinymce.init({
-      menubar: false,
-      selector: "textarea.richTextBox",
-      skin_url:
-      $('meta[name="assets-path"]').attr("content") + "?path=js/skins/voyager",
-      min_height: 100,
-      height: 200,
-      resize: "vertical",
-      plugins: "link, image, code, table, textcolor, lists",
-      extended_valid_elements:
-      "input[id|name|value|type|class|style|required|placeholder|autocomplete|onclick]",
-      file_browser_callback: function (field_name, url, type, win) {
-         if (type == "image") {
-            $("#upload_file").trigger("click")
-         }
+// function tinymce_init_callback(editor)
+// {  
+//    editor.remove();
+// }
+$(window).on('load', function () {
+   tinymce.remove();
+   var settings = window.voyagerTinyMCE.getConfig();
+   var myettings = {
+      menubar: true,
+      image_advtab: true,
+      base_url: '',
+      plugins: 'template link image table code lists',
+      toolbar: 'styleselect | bold italic underline | forecolor backcolor | alignleft aligncenter alignright | bullist numlist outdent indent | link image table | code template',
+      content_css: '/css/voyagers.css',
+      templates: [
+         {
+            title: 'Kırmızı Background Beyaz Text Alert',
+            description: 'Kırmızı Background Beyaz Text Alert',
+            content: '<div class="ilgi"><a style="font-size:22px; color:white;" href="#" class="text-center"><p> İçeriğiniz Buraya Gelecek </p></a></div>'
+         }, 
+      ],
+      init_instance_callback: (editor) => {
+         console.log(editor);
       },
-      toolbar:
-      "styleselect bold italic underline | forecolor backcolor | alignleft aligncenter alignright | bullist numlist outdent indent | link image table | code",
-      convert_urls: false,
-      image_caption: true,
-      image_title: true,
-   })
-}
+   };
+   // Sadece myettings'deki yeni özellikleri settings'e ekleyin
+   Object.assign(settings, myettings);
+   tinymce.init(settings);
+});

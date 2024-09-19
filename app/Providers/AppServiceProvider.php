@@ -10,6 +10,7 @@ use App\Social;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
+use TCG\Voyager\Facades\Voyager;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -20,7 +21,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        Voyager::addFormField(\App\FormFields\Repeater::class);
     }
 
     /**

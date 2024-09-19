@@ -9,8 +9,33 @@ $(window).on('load', function () {
       menubar: true,
       image_advtab: true,
       base_url: '',
-      plugins: 'template link image table code lists',
-      toolbar: 'styleselect | bold italic underline | forecolor backcolor | alignleft aligncenter alignright | bullist numlist outdent indent | link image table | code template',
+      toolbar: 'undo redo | styleselect | bold italic underline strikethrough | alignleft aligncenter alignright alignjustify | outdent indent | bullist numlist | forecolor backcolor | fontsizeselect fontselect | link image media | code template | removeformat | cut copy paste | subscript superscript | table | hr | print | preview | anchor | pagebreak | spellchecker | searchreplace | visualblocks visualchars | charmap | emoticons | fullscreen | insertdatetime | nonbreaking | save | directionality | paste textpattern | help',
+      plugins: 'advlist autolink link image lists charmap print preview hr anchor pagebreak searchreplace wordcount visualblocks visualchars code fullscreen insertdatetime media nonbreaking save table directionality template paste textpattern ',
+      style_formats: [
+         { title: 'Headers', items: [
+            { title: 'Header 1', format: 'h1' },
+            { title: 'Header 2', format: 'h2' },
+            { title: 'Header 3', format: 'h3' },
+            { title: 'Header 4', format: 'h4' },
+            { title: 'Header 5', format: 'h5' },
+            { title: 'Header 6', format: 'h6' }
+         ]},
+         { title: 'Inline', items: [
+            { title: 'Bold', icon: 'bold', format: 'bold' },
+            { title: 'Italic', icon: 'italic', format: 'italic' },
+            { title: 'Underline', icon: 'underline', format: 'underline' },
+            { title: 'Strikethrough', icon: 'strikethrough', format: 'strikethrough' },
+            { title: 'Superscript', icon: 'superscript', format: 'superscript' },
+            { title: 'Subscript', icon: 'subscript', format: 'subscript' },
+            { title: 'Code', icon: 'code', format: 'code' }
+         ]},
+         { title: 'Blocks', items: [
+            { title: 'Paragraph', format: 'p' },
+            { title: 'Blockquote', format: 'blockquote' },
+            { title: 'Div', format: 'div' },
+            { title: 'Pre', format: 'pre' }
+         ]}
+      ],
       content_css: '/css/voyager_tinymce.css',
       templates: [
          {
@@ -22,6 +47,11 @@ $(window).on('load', function () {
             title: 'İlginizi Çekebilir',
             description: 'İlginizi Çekebilir İSG Videoları',
             content: '<div class="ilgi"><div class="row"><div class="col-xs-3 col-md-2"><img src="/img/index/video-icon.png" alt="isg videoları" class="img-responsive"></div><div class="col-xs-8 col-md-10"><p>İLGİNİZİ ÇEKEBİLİR!</p><p class="sub"><a style="font-size:22px;" target="_blank" href="/isg-videolari"><u>İSG Videoları</u></a></p></div></div></div>'
+         },
+         {
+            title:"Card Default",
+            description:"Bootstrap Card",
+            content:'<div class="panel panel-default"><div class="panel-heading"><b>Başlık</b></div><div class="panel-body"></div></div>',
          }, 
          {
             title: 'Card Danger',

@@ -50,7 +50,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-sm-3">
-					<div class="logo"><a href="" title="Özden OSGB Anasayfası"><img src="img/logo_footer.png" alt="Özden OSGB Logo" title="Özden OSGB Logo"/></a></div>
+					<div class="logo"><a href="{{route('home')}}" title="{{setting('site.title')}} Anasayfası"><img src="/img/logo_footer.png" alt="{{setting('site.title')}} Logo" title="{{setting('site.title')}} Logo"/></a></div>
 				</div>
 				<div class="col-sm-2 col-sm-offset-1">
 					<p class="title">OSGB</p>

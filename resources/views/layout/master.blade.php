@@ -122,18 +122,18 @@
 @stack('page_codes')
 @if (env('APP_ENV') != 'production')
 <script>
-	$(document).ready(function() {
-		$('body *:not(script):not(link)').each(function() {
-			if ($(this).children().length === 0) {
-				var htmlContent = this.outerHTML;
-				if (htmlContent) {
-					if (htmlContent.includes('https://ozdenosgb.com') || htmlContent.includes('https://www.ozdenosgb.com')) {
-						this.outerHTML = htmlContent.replace(/https:\/\/(www\.)?ozdenosgb\.com/g, @if(env('APP_ENV') == 'local') 'http://ozdenosgb.test' @else 'https://ozdenosgb.bario.com.tr'  @endif );
-					}
-				}
-			}
-		});
-	});
+	// $(document).ready(function() {
+	// 	$('body *:not(script):not(link)').each(function() {
+	// 		if ($(this).children().length === 0) {
+	// 			var htmlContent = this.outerHTML;
+	// 			if (htmlContent) {
+	// 				if (htmlContent.includes('ozdenosgb.test') || htmlContent.includes('ozdenosgb.bario.com.tr')) {
+	// 					this.outerHTML = htmlContent.replace(/https:\/\/(www\.)?ozdenosgb\.com/g, @if(env('APP_ENV') == 'local') 'http://ozdenosgb.bario.com.tr' @else 'https://ozdenosgb.bario.com.tr'  @endif );
+	// 				}
+	// 			}
+	// 		}
+	// 	});
+	// });
 </script>
 @endif
 </body>

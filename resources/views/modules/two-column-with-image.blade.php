@@ -8,7 +8,7 @@
     <div class="musteri-klubu-text">
      <h2 class="testi-header">{{$module->title}}</h2>
      {!! $module->text !!}
-     <a href="{{$module->url}}">{{$module->button}}</a>
+     <a href="{{$module->url}}">{!! $module->button !!}</a>
     </div>
    </div>
   </div>

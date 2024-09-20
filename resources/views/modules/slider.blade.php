@@ -8,7 +8,7 @@
   <div class="item slides {{$loop->index == 0 ? 'active':''}}">
    <div class="slide" style="background-image: url({{asset($item->image)}})"></div>
    <div class="hero">
-    <h2 class="title">{{$item->title}}</h2>
+    <h2 class="title">{!! $item->title !!}</h2>
     <h3 class="sub">{{$item->text}}</h3>
     @if (isset($item->button_title1) && isset($item->button_link1))
     <br/>

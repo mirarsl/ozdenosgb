@@ -52,40 +52,23 @@
 				<div class="col-sm-3">
 					<div class="logo"><a href="{{route('home')}}" title="{{setting('site.title')}} Anasayfası"><img src="/img/logo_footer.png" alt="{{setting('site.title')}} Logo" title="{{setting('site.title')}} Logo"/></a></div>
 				</div>
-				<div class="col-sm-2 col-sm-offset-1">
-					<p class="title">OSGB</p>
-					<ul>
-						<li><a href="is-guvenligi-uzmani">İş Güvenliği Uzmanı</a></li>
-						<li><a href="isyeri-hekimi">İşyeri Hekimi</a></li>
-						<li><a href="saglik-personeli">Sağlık Personeli</a></li>
-						<li><a href="hizmet-suresi-hesaplama">Süre Hesaplama</a></li>
-					</ul>
-				</div>
-				<div class="col-sm-2">
-					<p class="title">ÖLÇÜM</p>
-					<ul>
-						<li><a href="isyeri-ortam-olcumleri">Ortam Ölçümleri</a></li>
-						<li><a href="periyodik-test-ve-kontroller">Periyodik Kontrol</a></li>
-						<li><a href="akreditasyonlarimiz">Akreditasyonlarimiz</a></li>
-					</ul>
-				</div>
-				<div class="col-sm-2">
-					<p class="title">İSG PORTAL</p>
-					<ul>
-						<li><a href="portal">İSG Yazılımı</a></li>
-						<li><a href="is-sagligi-ve-guvenligi">İş Sağlığı ve Güvenliği</a></li>
-						<li><a href="is-sagligi-ve-guvenligi-kanunu">İş Sağlığı ve Güvenliği Kanunu</a></li>
-					</ul>
-				</div>
+				{{ menu('Footer','menus.footer') }}
 				<div class="col-sm-2">
 					<div class="social-networks">
-						<a href="https://instagram.com/ozdenosgb" class="twitter" target="_blank" title="Özden OSGB Instagram Hesabı"><i class="fa fa-instagram"></i></a>
-						<br/>
-						<a href="https://twitter.com/ozdenosgb" class="twitter" target="_blank" title="Özden OSGB Twitter Hesabı"><i class="fa fa-twitter"></i></a>
-						<a href="https://www.facebook.com/OzdenOsgb/" class="facebook" target="_blank" title="Özden OSGB Facebook Hesabı"><i class="fa fa-facebook"></i></a>
-						<a href="https://plus.google.com/117272397345116958309" class="google" target="_blank" title="Özden OSGB Google Plus Hesabı"><i class="fa fa-google-plus"></i></a>
+						@if ($sharedContent['Social']->facebook)
+						<a href="{{$sharedContent['Social']->facebook}}" class="twitter" target="_blank" title="Özden OSGB Facebook Hesabı"><i class="fa fa-facebook"></i></a>
+						@endif
+						@if ($sharedContent['Social']->instagram)
+						<a href="{{$sharedContent['Social']->instagram}}" class="twitter" target="_blank" title="Özden OSGB Instagram Hesabı"><i class="fa fa-instagram"></i></a>
+						@endif
+						@if ($sharedContent['Social']->twitter)
+						<a href="{{$sharedContent['Social']->twitter}}" class="twitter" target="_blank" title="Özden OSGB Twitter Hesabı"><i class="fa fa-twitter"></i></a>
+						@endif
+						@if ($sharedContent['Social']->google)
+						<a href="{{$sharedContent['Social']->google}}" class="twitter" target="_blank" title="Özden OSGB Google Plus Hesabı"><i class="fa fa-google-plus"></i></a>
+						@endif
 					</div>
-					<a href="iletisim" type="button" class="btn btn-default">İletişim</a>
+					<a href="{{route('page','iletisim')}}" type="button" class="btn btn-default">İletişim</a>
 				</div>
 			</div>
 		</div>
@@ -120,21 +103,5 @@
 </script>
 @stack('scripts')
 @stack('page_codes')
-@if (env('APP_ENV') != 'production')
-<script>
-	// $(document).ready(function() {
-	// 	$('body *:not(script):not(link)').each(function() {
-	// 		if ($(this).children().length === 0) {
-	// 			var htmlContent = this.outerHTML;
-	// 			if (htmlContent) {
-	// 				if (htmlContent.includes('ozdenosgb.test') || htmlContent.includes('ozdenosgb.bario.com.tr')) {
-	// 					this.outerHTML = htmlContent.replace(/https:\/\/(www\.)?ozdenosgb\.com/g, @if(env('APP_ENV') == 'local') 'http://ozdenosgb.bario.com.tr' @else 'https://ozdenosgb.bario.com.tr'  @endif );
-	// 				}
-	// 			}
-	// 		}
-	// 	});
-	// });
-</script>
-@endif
 </body>
 </html>

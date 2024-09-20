@@ -19,3 +19,10 @@
   </div>
  </div>
 </section>
+@push('links')
+    <style>
+     #services .ref-panel > div > div{
+        min-height: 320px;
+     }
+    </style>
+@endpush

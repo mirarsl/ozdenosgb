@@ -71,6 +71,8 @@ $(window).on('load', function () {
       ],
       init_instance_callback: (editor) => {
       },
+      relative_urls: false,
+      remove_script_host: true,
    };
    // Sadece myettings'deki yeni özellikleri settings'e ekleyin
    Object.assign(settings, myettings);

@@ -81,7 +81,7 @@
 	<noscript id="deferred-styles">
 		<link rel="stylesheet" type="text/css" href="/font-awesome/css/font-awesome.min.css"/>
 		<link rel="stylesheet" type="text/css" href="/css/owl-carousel.min.css"/>
-		<link href="/css/website.css?v=45" rel="stylesheet">
+		<link href="/css/website.css?v=46" rel="stylesheet">
 	</noscript>
 	<script>
 		var loadDeferredStyles = function() {

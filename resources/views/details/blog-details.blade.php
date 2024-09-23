@@ -3,20 +3,22 @@
 <section class="blog">
  <div class="container">
   <div class="row">
+   @if($Page->image != null || $Page->author != null)
    <div class="col-md-4 left-side">
     @if($Page->image != null)
     <div class="thumbnail">
      <img src="{{asset($Page->image)}}" alt="{{$Page->title}}" class="img-responsive">
     </div>
     @endif
+    @if($Page->author != null)
     <div class="writer-area">
-     @if($Page->author != null)
      <p><i class="fa fa-user"></i> <b>Yazan:</b> {{$Page->author}}</p>
      @endif
      <p><i class="fa fa-calendar"></i> <b>Tarih:</b> {{$Page->date('d/m/Y')}}</p>
     </div>
    </div>
-   <div class="{{$Page->image != null ? 'col-md-8' : 'col-md-12'}}">
+   @endif
+   <div class="col-md-{{$Page->image != null || $Page->author != null ? '8' : '12'}}">
     {!! $Page->text !!}
     
     @if ($Page->questions != null)

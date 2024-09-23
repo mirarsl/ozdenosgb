@@ -1,4 +1,7 @@
 <div class="row align-center">
+ @if ($Page->button_title != null)
+ <p>{{$Page->button_title}}</p>
+ @endif
  <div class="col-md-8">
   <div class="row stylish-panel">
    @foreach ($data as $item)

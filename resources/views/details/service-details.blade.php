@@ -42,11 +42,10 @@
             </div>
             @endif
             <div class="{{$Page->show_image == 1 && $Page->calculation == 0 ? ' col-md-8':'col-md-12 text-center'}}">
-                {!! $Page->text !!}
-
                 @if ($Page->show_list == 1)
                 @include('details.partials.altlist',['data' => $Page->data])
                 @endif
+                {!! $Page->text !!}
                 @if ($Page->calculation == 1)
                 @include('details.partials.calculate')
                 @endif

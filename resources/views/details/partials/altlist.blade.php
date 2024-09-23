@@ -7,7 +7,7 @@
    @foreach ($data as $item)
    <div class="col-md-4">
     <div>
-     <img src="{{asset($item->image)}}" alt="{{$item->title}}" class="img-circle img-thumbnail">
+     <img src="{{asset($item->icon ?? $item->image)}}" alt="{{$item->title}}" class="img-circle img-thumbnail">
      <h2>{{$item->title}}</h2>
      <a href="{{route('service',$item->fullSlug())}}" class="btn btn-primary">Hesapla</a>
     </div>

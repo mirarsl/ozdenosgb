@@ -37,7 +37,7 @@
             @if ($Page->show_image == 1 && $Page->calculation == 0)
             <div class="col-md-4 left-side">
                 <div class="thumbnail">
-                    <img src="{{asset($Page->image)}}" alt="{{$Page->title}}" class="img-responsive">
+                    <img src="{{asset($Page->image ?? $Page->icon)}}" alt="{{$Page->title}}" class="img-responsive">
                 </div>
             </div>
             @endif

@@ -34,11 +34,14 @@ class Page extends Model
                 }
             }
         }
-        
-        if(Schema::hasColumn(app($page->model_name)->getTable(), 'ordering')) {
+        if(method_exists(app($page->model_name), 'scopeOrder')) {
+            $data = $data->order();
+        }else if(Schema::hasColumn(app($page->model_name)->getTable(), 'ordering')) {
             $data = $data->orderBy('ordering');
+            $data = $data->orderBy('id','desc');
+        }else{
+            $data = $data->orderBy('id','desc');
         }
-        $data = $data->orderBy('id','desc');
         $data = $data->get();
         if(empty($data)) return false;
         return $data;

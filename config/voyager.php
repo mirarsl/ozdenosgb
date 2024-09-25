@@ -191,7 +191,7 @@ return [
     ],
 
     'additional_js' => [
-        '../js/voyager.js',
+        'http://ozdenosgb.test/js/voyager.js',
         '../js/tinymce.min.js',
         '../js/plugins/template/plugin.min.js',
         '../js/plugins/advtemplate/plugin.min.js',

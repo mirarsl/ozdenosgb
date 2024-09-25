@@ -10,7 +10,7 @@
    @foreach ($module->data() as $item)
    <div class="col-md-5ths col-xs-6">
     <div class="thumbnail thumbnail-akre">
-     <img class="img-responsive" src="{{asset($item->image)}}" alt="{{$item->title}}" title="{{$item->title}}"/>
+     <img class="img-responsive" style="padding: 10px" src="{{asset($item->image)}}" alt="{{$item->title}}" title="{{$item->title}}"/>
      <div class="caption">
       <br/>
       <a href="{{route('accreditation',$item->slug)}}" class="akre-title">{{$item->title}}</a>

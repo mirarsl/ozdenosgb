@@ -4,6 +4,7 @@
  <div class="container">
   <div class="row">
    <div class="col-md-4">
+    @if (isset($Page->gallery))
     @foreach (json_decode($Page->gallery) as $item)
     <div class="col-md-12">
      <a href="{{asset($item)}}" data-fancybox="gallery" data-title="{{$Page->title}}">
@@ -11,6 +12,13 @@
      </a>
     </div>
     @endforeach
+    @else
+    <div class="col-md-12">
+     <a href="{{asset($Page->image)}}" data-fancybox="gallery" data-title="{{$Page->title}}">
+      <img src="{{asset($Page->image)}}" class="img-responsive" alt="{{$Page->title}}">
+     </a>
+    </div>
+    @endif
    </div>
    <div class="col-md-8">
     <div class="col-md-12">

@@ -17,5 +17,11 @@
    {!! $Page->text !!}
   </div>
  </div>
-
 </section>
+@push('links')
+    <style>
+     .basindabiz img {
+        max-height: 160px
+     }
+    </style>
+@endpush

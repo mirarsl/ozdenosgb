@@ -24,7 +24,7 @@
             <loc>{{ route('service', $service->fullSlug()) }}</loc>
             <lastmod>{{ date('Y-m-d') }}T{{date('H:i:s')}}+00:00</lastmod>
             <changefreq>Daily</changefreq>
-            <priority>0.8</priority>
+            <priority>1.0</priority>
         </url>
     @endforeach
 
@@ -42,7 +42,7 @@
             <loc>{{ route('news', $news->slug) }}</loc>
             <lastmod>{{ date('Y-m-d') }}T{{date('H:i:s')}}+00:00</lastmod>
             <changefreq>Daily</changefreq>
-            <priority>0.8</priority>
+            <priority>1.0</priority>
         </url>
     @endforeach
 
@@ -60,7 +60,7 @@
             <loc>{{ route('posters', $poster->slug) }}</loc>
             <lastmod>{{ date('Y-m-d') }}T{{date('H:i:s')}}+00:00</lastmod>
             <changefreq>Daily</changefreq>
-            <priority>0.8</priority>
+            <priority>1.0</priority>
         </url>
     @endforeach
 
@@ -69,7 +69,7 @@
             <loc>{{ route('presentation', $presentation->slug) }}</loc>
             <lastmod>{{ date('Y-m-d') }}T{{date('H:i:s')}}+00:00</lastmod>
             <changefreq>Daily</changefreq>
-            <priority>0.8</priority>
+            <priority>1.0</priority>
         </url>
     @endforeach
 
@@ -87,7 +87,7 @@
             <loc>{{ route('blog', $blog->slug) }}</loc>
             <lastmod>{{ date('Y-m-d') }}T{{date('H:i:s')}}+00:00</lastmod>
             <changefreq>Daily</changefreq>
-            <priority>0.8</priority>
+            <priority>1.0</priority>
         </url>
     @endforeach
 

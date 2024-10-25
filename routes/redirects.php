@@ -10,7 +10,7 @@ Route::get('/blog/iletisim', function(){
     return redirect()->to('/iletisim',301);
 });
 
-Route::get('/blog/covid-19', function(){
+Route::get('/blog/covid19', function(){
     return redirect()->to('/covid19',301);
 });
 

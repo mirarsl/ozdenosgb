@@ -21,6 +21,7 @@ Route::group(['prefix' => 'admin'], function () {
     Route::post('orderImages/{table}/{field}/{id}', [MyVoyagerController::class,'orderImages'])->name('voyager.orderImages');
 });
 
+include 'redirects.php';
 
 Route::get('sitemap.xml', [PageController::class, 'sitemap'])->name('sitemap');
 

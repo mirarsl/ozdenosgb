@@ -54,3 +54,6 @@ Route::get('/blog/blog/pandemi-doneminde-uzaktan-calismalarda-ergonomik-korunma-
     return redirect()->to('/blog/uzaktan-calismalarda-ergonomik-korunma-yollari',301);
 });
 
+Route::get('/blog/blog/', function(){
+    return redirect()->to('/blog',301);
+});

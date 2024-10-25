@@ -356,11 +356,16 @@ class PageController extends Controller
         function sitemap()
         {
             $Page = Page::all()->except(1);
-            $Projects = Project::active()->get();
-            $Plans = Plan::active()->get();
-            $News = Blog::active()->get();
-            
-            $content = view('sitemap.index', compact('Page', 'Projects','Plans','News'));
+            $Service = Service::active()->get();
+            $ClientCategories = ClientCategory::all();
+            $News =  News::active()->order()->get();
+            $Accreditation = Accreditation::order()->get();
+            $Posters = Poster::active()->order()->get();
+            $Presentation = Presentation::active()->order()->get();
+            $Coverages =  CoverageCity::active()->order()->where('page',1)->get();
+            $Blogs = Blog::active()->order()->get();
+
+            $content = view('sitemap.index', compact('Page', 'Service','ClientCategories','News','Accreditation','Posters','Presentation','Coverages','Blogs'));
             return response($content)->header('Content-Type', 'application/xml');
         }
     }

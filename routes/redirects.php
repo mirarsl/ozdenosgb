@@ -3,7 +3,7 @@
 use Illuminate\Support\Facades\Route;
 
 Route::get('/blog/blog/pandemi-ile-yasam', function(){
-    return redirect()->to('/blog',301);
+    return redirect()->to('/blog/pandemi-i-le-yasam',301);
 });
 
 Route::get('/blog/iletisim', function(){

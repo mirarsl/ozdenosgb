@@ -51,6 +51,9 @@
 			<div class="row">
 				<div class="col-sm-3">
 					<div class="logo"><a href="{{route('home')}}" title="{{setting('site.title')}} Anasayfası"><img src="/img/logo_footer.png" alt="{{setting('site.title')}} Logo" title="{{setting('site.title')}} Logo"/></a></div>
+					<span class="small">
+						Made with <i class="fa fa-heart"></i> by <a title="Bario Creative Agency tarafından panel entegrasyonu geliştirilmiştir." rel="dofollow" href="https://bario.com.tr" target="_blank" style="color: #fff;">Bario.</a>
+					</span>
 				</div>
 				{{ menu('Footer','menus.footer') }}
 				<div class="col-sm-2">

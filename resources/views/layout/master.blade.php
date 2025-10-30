@@ -106,5 +106,6 @@
 </script>
 @stack('scripts')
 @stack('page_codes')
+{!! setting('site.footer_libs') !!}
 </body>
 </html>

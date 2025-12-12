@@ -15,7 +15,7 @@
       </div>
      </div>
     </div>
-    <div class="row offices">
+    {{-- <div class="row offices">
      <div class="col-md-12">
       <div class="breadcrumb">
        <h3>OSGB Şubelerimiz</h3>
@@ -28,7 +28,7 @@
        </div>
       </div>
      </div>
-    </div>
+    </div> --}}
     <div class="row offices">
      <div class="col-md-12">
       <div class="breadcrumb">

@@ -33,9 +33,9 @@ class PageController extends Controller
         $segments = explode('/',$request->slug);
         foreach ($segments as $key => $value) {
             if($key == 0){
-                $Page = Page::where('slug', $value)->where('top_page',null)->first();
+                $Page = Page::where('slug', $value)->where('top_page',null)->active()->first();
             }else{
-                $Page = $Page->pages()->where('slug',$value)->first();
+                $Page = $Page->pages()->where('slug',$value)->active()->first();
             }
             if (empty($Page)) abort(404);
         }

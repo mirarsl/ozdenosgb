@@ -7,6 +7,11 @@ use Illuminate\Support\Facades\Schema;
 
 class Page extends Model
 {
+    public function scopeActive($query)
+    {
+        return $query->where('status', 1);
+    }
+    
     function modules() {
         return $this->belongsToMany(Module::class,"page_modules",'page_id','module_id');
      }

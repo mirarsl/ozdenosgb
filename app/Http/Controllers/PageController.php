@@ -355,7 +355,7 @@ class PageController extends Controller
         
         function sitemap()
         {
-            $Page = Page::all()->except(1);
+            $Page = Page::all()->active()->except(1);
             $Service = Service::active()->get();
             $ClientCategories = ClientCategory::all();
             $News =  News::active()->order()->get();

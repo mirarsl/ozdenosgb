@@ -1,6 +1,6 @@
 @extends('layout.master')
 @section('content')
-<h1 hidden><?=$Page->spot ?? setting('site.title')?></h1>
+<h1 hidden><?=$Page->hero?></h1>
 @foreach ($Page->modules as $module)
 @if (View::exists('modules.' . $module->slug))
 @include('modules.' . $module->slug, ['module' => $module])
